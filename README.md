@@ -13,21 +13,33 @@ cd assignment_task
 
 
 ## 2. Set Up a Virtual Environment
+```sh
 pip install --upgrade pip
 pip install virtualenv
 virtualenv -p python3 venv
 source venv/bin/activate
+```
+
+
 
 
 ## 3. Install Dependencies
+```sh
 (venv) pip install -r requirements.txt
+```
 
 ##4. Apply Database Migrations
+```sh
 (venv) python manage.py migrate
+```
 
 ##5. Run the Development Server
-5. Run the Development Server
-  python manage.py runserver
+```sh
+pythosn manage.py runserver
+```
+
 ##6 Genereate admin user to run api:
-  python manage.py createsuperuser
+```sh
+ python manage.py createsuperuser
+```
 
