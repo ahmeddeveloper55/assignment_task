@@ -27,4 +27,7 @@ source venv/bin/activate
 
 ##5. Run the Development Server
 5. Run the Development Server
+  python manage.py runserver
+##6 Genereate admin user to run api:
+  python manage.py createsuperuser
 
