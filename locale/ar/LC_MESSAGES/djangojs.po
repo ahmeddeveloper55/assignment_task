@@ -1,0 +1,399 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-22 09:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\static\rakez\assets\js\component\dropzone.js:98
+#: .\static\rakez\assets\js\component\dropzone.js:140
+#: .\static\rakez\assets\js\component\dropzone.js:170
+#: .\static\rakez\assets\js\component\form.js:238
+#: .\static\rakez\assets\js\component\form.js:257
+msgid "Updated Successfully"
+msgstr "تم التحديث بنجاح"
+
+#: .\static\rakez\assets\js\component\dropzone.js:98
+#: .\static\rakez\assets\js\component\dropzone.js:140
+#: .\static\rakez\assets\js\component\dropzone.js:170
+#: .\static\rakez\assets\js\component\form.js:238
+#: .\static\rakez\assets\js\component\form.js:257
+msgid "The changes have been saved successfully"
+msgstr "تم حفظ التغييرات بنجاح"
+
+#: .\static\rakez\assets\js\component\form.js:219
+msgid "Added Successfully"
+msgstr "اضيف بنجاح"
+
+#: .\static\rakez\assets\js\component\form.js:219
+msgid "The item has been added successfully"
+msgstr "تمت إضافة العنصر بنجاح"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "MON"
+msgstr "الاثنين"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "TUE"
+msgstr "الثلاثاء"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "WED"
+msgstr "الاربعاء"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "THU"
+msgstr "الخميس"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "FRI"
+msgstr "الجمعة"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "SAT"
+msgstr "السبت"
+
+#: .\static\rakez\assets\js\component\stats.js:4
+msgid "SUN"
+msgstr "ألأحد"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Jan"
+msgstr "يناير"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Feb"
+msgstr "فبراير"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Mar"
+msgstr "مارس"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Apr"
+msgstr "أبريل"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "May"
+msgstr "مايو"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Jun"
+msgstr "يونيو"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Jul"
+msgstr "يوليو"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Aug"
+msgstr "أغسطس"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Sept"
+msgstr "سبتمبر"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Oct"
+msgstr "اكتو بر"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Nov"
+msgstr "نوفمبر"
+
+#: .\static\rakez\assets\js\component\stats.js:8
+msgid "Dec"
+msgstr "ديسمبر"
+
+#: .\static\rakez\assets\js\component\sweetalert.js:39
+msgid "Confirm"
+msgstr "تأكيد"
+
+#: .\static\rakez\assets\js\component\sweetalert.js:40
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: .\static\rakez\assets\js\component\sweetalert.js:75
+msgid ""
+"The operation failed. An error occurred during execution. Refresh the page "
+"and try again"
+msgstr "فشلت العملية. حدث خطأ أثناء التنفيذ. قم بتحديث الصفحة وحاول مرة أخرى."
+
+#: .\static\rakez\assets\js\component\sweetalert.js:89
+#: .\static\rakez\assets\js\component\sweetalert.js:113
+msgid "Are you sure?"
+msgstr "هل أنت متأكد؟"
+
+#: .\static\rakez\assets\js\component\sweetalert.js:90
+#: .\static\rakez\assets\js\component\sweetalert.js:114
+msgid ""
+"The event will be executed and you may not be able to cancel the "
+"modifications"
+msgstr "سيتم تنفيذ الحدث وقد لا تتمكن من إلغاء التعديلات."
+
+#: .\static\rakez\assets\js\component\sweetalert.js:124
+msgid "You do not have permissions to perform this operation."
+msgstr "ليس لديك أذونات للقيام بهذه العملية."
+
+#: .\static\rakez\assets\js\component\sweetalert.js:165
+msgid "Done"
+msgstr "تمت العملية"
+
+#: .\static\rakez\assets\js\component\table.js:14
+msgid "No data is available in the table"
+msgstr "لا توجد بيانات متاحة في الجدول."
+
+#: .\static\rakez\assets\js\component\table.js:15
+msgid "Show _MENU_ entries"
+msgstr "إظهار  _MENU_ إدخالات"
+
+#: .\static\rakez\assets\js\component\table.js:16
+msgid "Please, wait..."
+msgstr "انتظر من فضلك..."
+
+#: .\static\rakez\assets\js\component\table.js:17
+msgid "Search:"
+msgstr "بحث:"
+
+#: .\static\rakez\assets\js\component\table.js:18
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "عرض _START_ الى _END_ من إجمالي _TOTAL_"
+
+#: .\static\rakez\assets\js\component\table.js:19
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "عرض 0 الى 0 من إجمالي 0"
+
+#: .\static\rakez\assets\js\component\table.js:21
+msgid "First"
+msgstr "الأول"
+
+#: .\static\rakez\assets\js\component\table.js:22
+msgid "Last"
+msgstr "ألأحير"
+
+#: .\static\rakez\assets\js\component\table.js:129
+#: .\static\rakez\assets\js\component\table.js:139
+msgid "There is no data added yet."
+msgstr "لا توجد بيانات مضافة حتى ألأن."
+
+#: .\static\rakez\assets\js\component\table.js:129
+#: .\static\rakez\assets\js\component\table.js:139
+msgid "Please add data to the system to access the desired information."
+msgstr "يرجى إضافة البيانات إلى النظام للوصول إلى المعلومات المطلوبة."
+
+#: .\static\rakez\assets\js\component\toast.js:27
+msgid "Success"
+msgstr "نجحت العملية"
+
+#: .\static\rakez\assets\js\component\toast.js:31
+#: .\static\rakez\assets\js\component\toast.js:35
+msgid "Error"
+msgstr "فشلت العملية"
+
+#: .\static\rakez\assets\js\component\toast.js:39
+msgid "Info"
+msgstr "معلومات"
+
+#: .\static\rakez\assets\js\pages\auth.init.js:57
+msgid "Please enter the verification code correctly"
+msgstr "الرجاء إدخال رمز التحقق بشكل صحيح"
+
+#: .\static\rakez\assets\js\pages\bank.init.js:45
+#: .\static\rakez\assets\js\pages\banner.init.js:29
+#: .\static\rakez\assets\js\pages\city.init.js:48
+#: .\static\rakez\assets\js\pages\customer.init.js:62
+#: .\static\rakez\assets\js\pages\facility.init.js:45
+#: .\static\rakez\assets\js\pages\feature.init.js:45
+#: .\static\rakez\assets\js\pages\housing.init.js:94
+#: .\static\rakez\assets\js\pages\housing.type.init.js:45
+#: .\static\rakez\assets\js\pages\land.init.js:93
+#: .\static\rakez\assets\js\pages\land.type.init.js:45
+#: .\static\rakez\assets\js\pages\neighborhood.init.js:50
+#: .\static\rakez\assets\js\pages\owner.init.js:74
+#: .\static\rakez\assets\js\pages\owner.type.init.js:45
+#: .\static\rakez\assets\js\pages\privacy_policy.init.js:8
+#: .\static\rakez\assets\js\pages\profit_margin.init.js:8
+#: .\static\rakez\assets\js\pages\release.init.js:8
+#: .\static\rakez\assets\js\pages\service.init.js:45
+#: .\static\rakez\assets\js\pages\street.init.js:51
+#: .\static\rakez\assets\js\pages\supervisor.init.js:65
+#: .\static\rakez\assets\js\pages\tag.init.js:8
+#: .\static\rakez\assets\js\pages\unit.init.js:8
+msgid "Activated"
+msgstr "نشيط"
+
+#: .\static\rakez\assets\js\pages\bank.init.js:46
+#: .\static\rakez\assets\js\pages\banner.init.js:30
+#: .\static\rakez\assets\js\pages\city.init.js:49
+#: .\static\rakez\assets\js\pages\customer.init.js:63
+#: .\static\rakez\assets\js\pages\facility.init.js:46
+#: .\static\rakez\assets\js\pages\feature.init.js:46
+#: .\static\rakez\assets\js\pages\housing.init.js:95
+#: .\static\rakez\assets\js\pages\housing.type.init.js:46
+#: .\static\rakez\assets\js\pages\land.init.js:94
+#: .\static\rakez\assets\js\pages\land.type.init.js:46
+#: .\static\rakez\assets\js\pages\neighborhood.init.js:51
+#: .\static\rakez\assets\js\pages\owner.init.js:75
+#: .\static\rakez\assets\js\pages\owner.type.init.js:46
+#: .\static\rakez\assets\js\pages\privacy_policy.init.js:9
+#: .\static\rakez\assets\js\pages\profit_margin.init.js:9
+#: .\static\rakez\assets\js\pages\release.init.js:9
+#: .\static\rakez\assets\js\pages\service.init.js:46
+#: .\static\rakez\assets\js\pages\street.init.js:52
+#: .\static\rakez\assets\js\pages\supervisor.init.js:66
+#: .\static\rakez\assets\js\pages\tag.init.js:9
+#: .\static\rakez\assets\js\pages\unit.init.js:9
+msgid "Disabled"
+msgstr "غير نشيط"
+
+#: .\static\rakez\assets\js\pages\banner.init.js:31
+msgid "Edit banner info"
+msgstr "تعديل بيانات البانر"
+
+#: .\static\rakez\assets\js\pages\notification.init.js:20
+msgid "Read"
+msgstr "مقروه"
+
+#: .\static\rakez\assets\js\pages\notification.init.js:21
+msgid "Unread"
+msgstr "غير مقروء"
+
+#: .\static\rakez\assets\js\pages\owner.init.js:61
+#: .\static\rakez\assets\js\pages\supervisor.init.js:50
+msgid "Enter the same password again"
+msgstr "أدخل نفس كلمة المرور مرة أخرى"
+
+#: .\static\rakez\assets\js\pages\owner.init.js:76
+msgid "Edit owner info"
+msgstr "تعديل بيانات مالك العقار"
+
+#: .\static\rakez\assets\js\pages\privacy_policy.init.js:10
+msgid "Edit privacy policy info"
+msgstr "تعديل سياسة الخصوصية"
+
+#: .\static\rakez\assets\js\pages\profit_margin.init.js:10
+msgid "Edit profit margin info"
+msgstr "تعديل بيانات نسبة الفائدة"
+
+#: .\static\rakez\assets\js\pages\release.init.js:10
+msgid "Edit release info"
+msgstr "تعديل بيانات الإصدار"
+
+#: .\static\rakez\assets\js\pages\supervisor.init.js:63
+msgid "Manager"
+msgstr "مدير"
+
+#: .\static\rakez\assets\js\pages\supervisor.init.js:64
+msgid "Employee"
+msgstr "موظف"
+
+#: .\static\rakez\assets\js\pages\tag.init.js:10
+msgid "Edit tag info"
+msgstr "تعديل بيانات التاق"
+
+#: .\static\rakez\assets\js\pages\unit.init.js:10
+msgid "Edit unit info"
+msgstr "تعديل بيانات الوحده"
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "opera"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "firefox"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "win"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "android"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "mac os x"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "linux"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "sunos"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "freebsd"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\plugins\lists\plugin.min.js:9
+msgid "cros"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\themes\silver\theme.min.js:9
+msgid "Cannot set source of a broadcasted event"
+msgstr ""
+
+#: .\venv\Lib\site-packages\tinymce\static\tinymce\themes\silver\theme.min.js:9
+msgid "Cannot get source of a broadcasted event"
+msgstr ""
+
+#~ msgid "Edit bank info"
+#~ msgstr "تعديل بيانات البنك"
+
+#~ msgid "Profit Margin management"
+#~ msgstr "إدارة هامش الربح"
+
+#~ msgid "Edit city info"
+#~ msgstr "تعديل بيانات المدينة"
+
+#~ msgid "Edit customer info"
+#~ msgstr "تعديل بيانات العميل"
+
+#~ msgid "View customer stats"
+#~ msgstr "عرض إحصائيات العميل"
+
+#~ msgid "Edit member info"
+#~ msgstr "تعديل بيانات العضو"
+
+#~ msgid "Edit neighborhood info"
+#~ msgstr "تعديل بيانات الحي"
+
+#~ msgid "Edit owner type info"
+#~ msgstr "تعديل بيانات نوع مالك العقار"
+
+#~ msgid "Edit project info"
+#~ msgstr "تعديل بيانات المشروع"
+
+#~ msgid "View project stats"
+#~ msgstr "عرض إحصائيات المشروع"
+
+#~ msgid "Edit project type info"
+#~ msgstr "تعديل بيانات انواع المشروع"
+
+#~ msgid "Edit street info"
+#~ msgstr "تعديل بيانات الشارع"
+
+#~ msgid "Edit supervisor info"
+#~ msgstr "تعديل بيانات المشرف"
+
+#~ msgid "Edit team info"
+#~ msgstr "تعديل بيانات الفريق"
+
+#~ msgid "Edit category info"
+#~ msgstr "تعديل بيانات الصنف"

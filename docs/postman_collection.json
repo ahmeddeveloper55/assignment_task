@@ -1,0 +1,157 @@
+{
+  "info": {
+    "name": "Programs CMS & Discovery",
+    "_postman_id": "5a4e1d8c-0000-4b3a-9d88-collection",
+    "description": "CMS and discovery endpoints for programs and episodes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CMS - Categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/cms/categories/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "cms", "categories", ""]
+        }
+      }
+    },
+    {
+      "name": "CMS - Tags",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/cms/tags/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "cms", "tags", ""]
+        }
+      }
+    },
+    {
+      "name": "CMS - Programs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/cms/programs/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "cms", "programs", ""]
+        }
+      }
+    },
+    {
+      "name": "CMS - Episodes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/cms/episodes/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "cms", "episodes", ""]
+        }
+      }
+    },
+    {
+      "name": "Discovery - Home",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/v1/discovery/home/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "discovery", "home", ""]
+        }
+      }
+    },
+    {
+      "name": "Discovery - Categories",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/v1/discovery/categories/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "discovery", "categories", ""]
+        }
+      }
+    },
+    {
+      "name": "Discovery - Programs",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/v1/discovery/programs/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "discovery", "programs", ""]
+        }
+      }
+    },
+    {
+      "name": "Discovery - Episodes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/v1/discovery/episodes/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "discovery", "episodes", ""]
+        }
+      }
+    },
+    {
+      "name": "Discovery - Search",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/v1/discovery/search/?q={{query}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "discovery", "search", ""],
+          "query": [
+            {
+              "key": "q",
+              "value": "{{query}}"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "query",
+      "value": "podcast"
+    }
+  ]
+}
