@@ -24,7 +24,7 @@ def client(request, view, action):
     return bool(user.is_authenticated and user.is_client)
 
 
-def owner(request, view, action):
+def editor(request, view, action):
     user = request.user
     return bool(user.is_authenticated and user.is_editor)
 

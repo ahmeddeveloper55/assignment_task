@@ -104,7 +104,7 @@ class User(AbstractUser, core_models.CommonModel, core_models.VerifiedModel, cor
         A method used to check if an object is an editor or not.
         @return: True if role equal 'property_editor' else False.
         """
-        return bool(self.role == RoleChoices.EDITOR and hasattr(self, 'editoruser') and self.is_login_allowed)
+        return bool(self.role == RoleChoices.EDITOR and hasattr(self, 'editor') and self.is_login_allowed)
 
     @property
     def is_developer(self):

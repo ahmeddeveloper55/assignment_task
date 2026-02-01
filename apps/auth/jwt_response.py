@@ -37,13 +37,12 @@ def jwt_response_payload_handler(user, request=None):
         'is_active': user.is_active,
     }
 
-    if user.is_editor:
-        editor = user.owneruser.owner
-        data = editor_serializers.EditorSerializer(editor, context=context).data
-        response.update({
-            'name': data['name'],
-            'email': data['email'],
-            'image': data['image'],
-        })
+    # if user.is_editor:
+    #     data = editor_serializers.EditorSerializer(user, context=context).data
+    #     response.update({
+    #         'name': data.get('editor_name') or data.get('name'),
+    #         'email': data.get('email'),
+    #         'image': data.get('image'),
+    #     })
 
     return response

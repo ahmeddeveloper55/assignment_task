@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('id', apps.core.modelfields.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('created_at', apps.core.modelfields.CreatedAtField(auto_now_add=True)),
                 ('updated_at', apps.core.modelfields.UpdatedAtField(auto_now=True)),
-                ('is_manager', apps.editor.modelfields.IsManagerField(default=False)),
+                ('is_manager', models.BooleanField(default=False)),
                 ('editor', apps.editor.modelfields.EditorField(on_delete=django.db.models.deletion.CASCADE, related_name='editorusers', to='editor.editor')),
                 ('user', apps.user.modelfields.UserOneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='%(class)s', to=settings.AUTH_USER_MODEL)),
             ],

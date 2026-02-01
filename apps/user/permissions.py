@@ -20,8 +20,7 @@ class UserAccessPolicy(AccessPolicy):
             return queryset.model.verified_objects.all()
 
         elif user.is_authenticated and user.is_editor:
-            editor = user.editoruser.editor
-            return queryset.model.verified_objects.editors(editoruser__editor=editor)
+            return queryset.model.verified_objects.filter(pk=user.pk)
 
         elif user.is_authenticated and user.is_client:
             return queryset.model.verified_objects.clients(pk=user.pk)

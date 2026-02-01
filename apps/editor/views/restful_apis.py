@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import parsers, filters as rest_filters, status
 from rest_framework.decorators import action
@@ -6,16 +7,18 @@ from ...core import viewsets, mixins as core_mixins
 from ...user.views import restful_apis as user_restful_apis
 from ...auth import jwt_response
 from .. import models, permissions, serializers, filters
+
+USER_MODEL = get_user_model()
 class EditorViewSet(core_mixins.CachedViewSetMixin, viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     """
-    This class deals with the owner data, through which you can return all the owners,
-    return the details of a single owner, create an owner, modify its data, or delete it.
+    This class deals with the editor data, through which you can return all the editors,
+    return the details of a single editor, create an editor, modify its data, or delete it.
 
     You must have the permissions in order to perform this operation,
     otherwise you will receive a message stating that you do not have the permissions to perform this event.
     """
     permission_classes = (permissions.EditorAccessPolicy,)
-    queryset = models.Editor.objects.none()
+    queryset = USER_MODEL.objects.none()
     serializer_class = serializers.EditorSerializer
     parser_classes = (parsers.MultiPartParser, parsers.FormParser, parsers.JSONParser)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
@@ -36,17 +39,17 @@ class EditorViewSet(core_mixins.CachedViewSetMixin, viewsets.ModelViewSet, core_
         kwargs = {'created_by': self.request.user if self.request.user.is_authenticated else None}
         return serializer.save(**kwargs)
 
-    def get_response(self, owner, serializer):
+    def get_response(self, user, serializer):
         """
-        This method is used to return the response when created owner.
+        This method is used to return the response when created editor.
         :return: response
         """
-        user = self.request.user
+        request_user = self.request.user
 
-        if user.is_authenticated and user.is_admin:
+        if request_user.is_authenticated and request_user.is_admin:
             return serializer.data
 
-        return self.get_jwt_response(owner.manager())
+        return self.get_jwt_response(user)
 
     def create(self, request, *args, **kwargs):
         """
@@ -59,8 +62,8 @@ class EditorViewSet(core_mixins.CachedViewSetMixin, viewsets.ModelViewSet, core_
         """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        owner = self.perform_create(serializer)
-        response = self.get_response(owner=owner, serializer=serializer)
+        user = self.perform_create(serializer)
+        response = self.get_response(user=user, serializer=serializer)
         return Response(response, status=status.HTTP_201_CREATED)
 
 
@@ -70,6 +73,6 @@ class EditorProfileViewSet(user_restful_apis.ProfileViewSet):
     as it contains a set of APIs, such as returning user information, updating user data,
     or deleting the user from the system.
     """
-    queryset = models.Editor.objects.none()
+    queryset = USER_MODEL.objects.none()
     permission_classes = (permissions.ProfileAccessPolicy,)
     serializer_class = serializers.EditorSerializer

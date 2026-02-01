@@ -11,10 +11,5 @@ from . import models
 
 
 @receiver(post_save, sender=models.Editor)
-def receiver_owner_created(sender, instance, created, *args, **kwargs):
-    pass
-
-
-@receiver(post_save, sender=models.EditorUser)
-def receiver_owner_user_created(sender, instance, created, *args, **kwargs):
+def receiver_editor_created(sender, instance, created, *args, **kwargs):
     pass

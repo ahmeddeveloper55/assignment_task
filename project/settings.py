@@ -469,7 +469,33 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Inspired by the user experience of Google’s Two-Step Authentication,
 # allowing users to authenticate through call,
 # text messages (SMS) or by using a token generator app like Google Authenticator.
+# Complete Two-Factor Authentication for Django.
+# Built on top of the one-time password framework django-otp and Django’s built-in authentication framework
+# django.contrib.auth for providing the easiest integration into most Django projects.
+# Inspired by the user experience of Google’s Two-Step Authentication,
+# allowing users to authenticate through call,
+# text messages (SMS) or by using a token generator app like Google Authenticator.
 
+# Which gateway to use for sending text messages. Should be set to a module or object providing a send_sms method.
+USE_SMS_SERVICE = env.bool('USE_SMS_SERVICE', default=False)
+
+# Currently, two gateways are bundled:
+# 'two_factor.gateways.fake.Fake' for development, recording tokens to the default logger.
+if USE_SMS_SERVICE:
+    # Twilio is the industry-leading and trusted platform that efficiently powers your customer engagement innovation.
+    # Acquire customers for life.
+    TWO_FACTOR_SMS_GATEWAY = 'apps.plugins.oursms.gateway.OurSMS'
+
+    # It's important to keep credentials such as your Oursms SRC and API Token
+    # and Auth token secure by storing them in a way that prevents unauthorized access.
+    OURSMS_API_TOKEN = env("OURSMS_API_TOKEN")
+    OURSMS_SRC = env("OURSMS_SRC")
+else:
+    TWO_FACTOR_SMS_GATEWAY = 'two_factor.gateways.fake.Fake'
+
+# Resend is a reliable platform for email communication and customer engagement.
+# It ensures secure and efficient email delivery.
+TWO_FACTOR_EMAIL_GATEWAY = 'apps.plugins.email.gateway.Resend'
 
 
 

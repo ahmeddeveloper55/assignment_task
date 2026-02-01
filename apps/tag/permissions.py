@@ -12,7 +12,7 @@ class TagAccessPolicy(AccessPolicy):
             "action": ["create", "update", "<method:patch>", "active", "disable", "destroy"],
             "principal": ["authenticated"],
             "effect": "allow",
-            "condition": ["(admin or editor or supervisor)"]
+            "condition_expression": ["(admin or editor or supervisor)"],
         }
     ]
 
@@ -23,8 +23,14 @@ class TagAccessPolicy(AccessPolicy):
         if user.is_anonymous:
             return queryset.model.objects.none()
 
-        if user.is_admin:
+        if getattr(user, "is_admin", False):
             return queryset.model.objects.all()
+        
+        # Editor / supervisor only see activated objects
+        if getattr(user, "is_editor", False) or getattr(user, "is_supervisor", False):
+            return queryset.model.activated_objects.all()
+        
+        
 
 
         return queryset.model.activated_objects.all()

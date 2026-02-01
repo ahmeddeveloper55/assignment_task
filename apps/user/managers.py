@@ -134,7 +134,7 @@ class BaseUserManager(DjangoBaseUserManager):
 
     def create_editor(self, phone_number, **extra_fields):
         """
-        Creates and saves an owner with the given phone_number and extra_fields.
+        Creates and saves an editor with the given phone_number and extra_fields.
         @:param phone_number: is the phone number for user
         @:param extra_fields: this is the extra attributes like email, username, password, first name,
         last name, and others.
@@ -206,7 +206,7 @@ class BaseUserManager(DjangoBaseUserManager):
 
     def editors(self, **filters):
         """
-        This method returns users with owner role
+        This method returns users with editor role
         @return: QuerySet
         """
         return self.get_queryset().editors(**filters)

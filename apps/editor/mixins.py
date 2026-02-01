@@ -4,6 +4,7 @@ from rest_access_policy import FieldAccessMixin
 from ..core import permissions, serializers as core_serializers, serializerfields as core_serializerfields
 from . import models, serializerfields
 from ..user import mixins as user_mixins
+from ..user import serializerfields as user_serializerfields
 
 class EditorSerializerMixin(user_mixins.UserSerializerMixin):
     """
@@ -14,6 +15,10 @@ class EditorSerializerMixin(user_mixins.UserSerializerMixin):
     """
     absolute_url = core_serializerfields.AbsoluteUrlField()
     role = serializerfields.RoleField()
+    name_en = serializers.CharField(source='editor.name_en', required=False, allow_blank=True)
+    name_ar = serializers.CharField(source='editor.name_ar', required=False, allow_blank=True)
+    description = serializers.CharField(source='editor.description', required=False, allow_blank=True, allow_null=True)
+    confirm = user_serializerfields.ConfirmPasswordField(required=False, write_only=True)
 
 
     def __init__(self, *args, **kwargs):
@@ -22,25 +27,26 @@ class EditorSerializerMixin(user_mixins.UserSerializerMixin):
         initialize the object’s attributes.
         """
         super(EditorSerializerMixin, self).__init__(*args, **kwargs)
-        self.fields.update({
-            'phone_number': serializerfields.PhoneNumberField(instance=self.instance),
-        })
 
     def to_representation(self, instance):
         """
         Object instance -> Dict of primitive datatypes.
         """
-        return super(EditorSerializerMixin, self).to_representation(instance)
+        representation = super(EditorSerializerMixin, self).to_representation(instance)
+        representation.pop('password', None)
+        representation.pop('confirm', None)
+        return representation
 
-    class Meta:
-        abstract = True
-        model = models.Editor
-        access_policy = permissions.SafeAccountAccessPolicy
-        fields = '__all__'
-        read_only_fields = ('is_active', 'enabled_at', 'created_at', 'updated_at')
-        extra_kwargs = {
-            'name': {'required': False, 'allow_blank': True},
-        }
+    def get_extra_kwargs(self):
+        """
+        Make password required only on create (like Member).
+        """
+        extra_kwargs = super().get_extra_kwargs()
+        if self.instance:
+            extra_kwargs['password'] = {'required': False}
+        else:
+            extra_kwargs['password'] = {'required': True}
+        return extra_kwargs
 
     def create(self, validated_data):
         """
@@ -50,16 +56,43 @@ class EditorSerializerMixin(user_mixins.UserSerializerMixin):
 
         return ExampleModel.objects.create(**validated_data)
         """
-        instance = self.Meta.model.objects.create_object(**validated_data)
-        instance.disable()
-        return instance
+        editor_data = validated_data.pop('editor', {})
+        validated_data.pop('confirm', None)
+
+        user = super(EditorSerializerMixin, self).create(validated_data)
+
+        if not editor_data.get('name'):
+            editor_data['name'] = editor_data.get('name_en') or editor_data.get('name_ar') or user.name or user.username
+        editor_data.setdefault('email', user.email)
+        editor_data.setdefault('phone_number', user.phone_number)
+
+        models.Editor.objects.create(user=user, **editor_data)
+        return user
 
     def update(self, instance, validated_data):
         # Simply set each attribute on the instance, and then save it.
         # Note that unlike `.create()` we don't need to treat many-to-many
         # relationships as being a special case. During updates, we already
         # have an instance pk for the relationships to be associated with.
-        return self.Meta.model.objects.update_object(instance, **validated_data)
+        editor_data = validated_data.pop('editor', None)
+        validated_data.pop('confirm', None)
+
+        user = super(EditorSerializerMixin, self).update(instance, validated_data)
+
+        if editor_data is not None:
+            editor, _ = models.Editor.objects.get_or_create(user=user)
+            if not editor_data.get('name') and not editor.name:
+                editor_data['name'] = editor_data.get('name_en') or editor_data.get('name_ar') or user.name or user.username
+            if editor.email in (None, ''):
+                editor_data.setdefault('email', user.email)
+            if editor.phone_number in (None, ''):
+                editor_data.setdefault('phone_number', user.phone_number)
+
+            for key, value in editor_data.items():
+                setattr(editor, key, value)
+            editor.save()
+
+        return user
 
     def get_absolute_url(self, obj):
         """
