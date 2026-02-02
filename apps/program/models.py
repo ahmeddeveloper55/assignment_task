@@ -37,6 +37,14 @@ class Program(core_models.CommonModel, core_models.TrackedModel, core_models.Act
         ordering = ['-created_at']
         verbose_name = _('program')
         verbose_name_plural = _('programs')
+        indexes = [
+            models.Index(
+                fields=['is_published', 'is_active'], name='program_pub_active_idx',),
+            models.Index(
+                fields=['category', '-created_at'], name='program_cat_created_idx',),
+            models.Index(
+                fields=['type', 'language'], name='program_type_lang_idx',),
+        ]
 
     def __str__(self):
         return f"{self.title}"

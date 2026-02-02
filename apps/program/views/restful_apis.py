@@ -9,7 +9,7 @@ class ProgramViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     """
     CMS CRUD for programs.
     """
-    queryset = models.Program.objects.none()
+    queryset = models.Program.objects.select_related('category').prefetch_related('tags').none()
     serializer_class = serializers.ProgramSerializer
     permission_classes = (permissions.ProgramAccessPolicy,)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
@@ -35,7 +35,7 @@ class DiscoveryProgramViewSet(viewsets.ReadOnlyModelViewSet,core_mixins.CachedVi
     Discovery programs.
     """
     cache_timeout = 24 * 60 * 60
-    queryset = models.Program.objects.none()
+    queryset = models.Program.objects.select_related('category').prefetch_related('tags').none() 
     serializer_class = serializers.ProgramSerializer
     permission_classes = (permissions.DiscoveryAccessPolicy,)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]

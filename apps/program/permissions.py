@@ -8,9 +8,9 @@ class ProgramAccessPolicy(AccessPolicy):
             "principal": ["authenticated"],
             "effect": "allow",
         },
-        # Create / update programs: admin, editor, supervisor
+        # Create / update / activate / deactivate programs: admin, editor, supervisor
         {
-            "action": ["create", "update", "<method:patch>"],
+            "action": ["create", "update", "<method:patch>", "active", "disable"],
             "principal": ["authenticated"],
             "effect": "allow",
             "condition_expression": ["(admin or editor or supervisor)"],

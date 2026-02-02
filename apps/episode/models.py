@@ -38,6 +38,11 @@ class Episode(core_models.CommonModel, core_models.TrackedModel,core_models.Acti
         ordering = ['-publish_date']
         verbose_name = _('episode')
         verbose_name_plural = _('episodes')
+        indexes = [
+            models.Index(fields=['is_published', 'is_active'], name='episode_pub_active_idx'),
+            models.Index(fields=['program', '-publish_date'], name='episode_program_pub_date_idx'),
+            models.Index(fields=['media_type'], name='episode_media_type_idx'),
+        ]
 
     def __str__(self):
         return f'{self.program.title} – {self.title}'

@@ -30,6 +30,7 @@ class ProgramTypeField(models.CharField):
         kwargs.setdefault("max_length", 50)
         kwargs.setdefault("choices", ProgramTypeChoices.choices)
         kwargs.setdefault("default", ProgramTypeChoices.PODCAST)
+        kwargs.setdefault("db_index", True)
         super(ProgramTypeField, self).__init__(*args, **kwargs)
 
 
@@ -40,6 +41,7 @@ class LanguageField(models.CharField):
         kwargs.setdefault("max_length", 10)
         kwargs.setdefault("choices", settings.LANGUAGES)
         kwargs.setdefault("default", settings.LANGUAGE_CODE)
+        kwargs.setdefault("db_index", True)
         super(LanguageField, self).__init__(*args, **kwargs)
 
 

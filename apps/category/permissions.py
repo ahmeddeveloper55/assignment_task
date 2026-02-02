@@ -9,7 +9,7 @@ class CategoryAccessPolicy(AccessPolicy):
             "effect": "allow",
         },
         {
-            "action": ["create", "update", "<method:patch>", "destroy"],
+            "action": ["create", "update", "<method:patch>", "destroy", "active", "disable"],
             "principal": ["authenticated"],
             "effect": "allow",
             "condition_expression": ["(admin or editor or supervisor)"]

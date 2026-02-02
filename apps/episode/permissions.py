@@ -12,7 +12,7 @@ class EpisodeAccessPolicy(AccessPolicy):
             "effect": "allow",
         },
         {
-            "action": ["create", "update", "<method:patch>"],
+            "action": ["create", "update", "<method:patch>", "active", "disable"],
             "principal": ["authenticated"],
             "effect": "allow",
             "condition_expression": ["(admin or editor or supervisor)"],

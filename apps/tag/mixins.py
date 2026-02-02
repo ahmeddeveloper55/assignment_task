@@ -19,7 +19,7 @@ class TagSerializerMixin(FieldAccessMixin, core_serializers.TranslationModelSeri
         model = models.Tag
         access_policy = permissions.TagAccessPolicy
         fields = '__all__'
-        read_only_fields = ('slug', 'is_active', 'is_active', 'enabled_at', 'created_at', 'updated_at')
+        read_only_fields = ('slug', 'is_active', 'enabled_at', 'created_at', 'updated_at')
 
     def get_absolute_url(self, obj):
         """

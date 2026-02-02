@@ -9,7 +9,7 @@ class EpisodeViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     """
     CMS CRUD for episodes.
     """
-    queryset = models.Episode.objects.none()
+    queryset = models.Episode.objects.select_related('program').prefetch_related('tags').none()
     serializer_class = serializers.EpisodeSerializer
     permission_classes = (permissions.EpisodeAccessPolicy,)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
@@ -31,11 +31,12 @@ class EpisodeViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
         # No need to call SearchService here; signal will pick it up.
 
 
-class PublicEpisodeViewSet(viewsets.ReadOnlyModelViewSet):
+class PublicEpisodeViewSet(viewsets.ReadOnlyModelViewSet,core_mixins.CachedViewSetMixin):
     """
     Discovery episodes.
     """
-    queryset = models.Episode.objects.none()
+    cache_timeout = 24 * 60 * 60
+    queryset = models.Episode.objects.select_related('program','program__category').prefetch_related('tags','links').none()
     serializer_class = serializers.EpisodeSerializer
     permission_classes = (permissions.DiscoveryEpisodeAccessPolicy,)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
