@@ -67,9 +67,10 @@ def search_internal_content(query: str, limit: int = 10, offset: int = 0):
     # Episodes: search title + short_description + body
     episode_qs = (
         Episode.objects.filter(
-            Q(is_published=True),
-            Q(program__is_active=True),
-            Q(program__is_published=True),
+            Q(is_active=True),  # Episode must be active
+            Q(is_published=True),  # Episode must be published
+            Q(program__is_active=True),  # Program must be active
+            Q(program__is_published=True),  # Program must be published
             Q(
                 Q(title__icontains=query)
                 | Q(short_description__icontains=query)
