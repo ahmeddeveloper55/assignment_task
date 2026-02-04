@@ -25,8 +25,7 @@ class ProgramViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
         # search indexing handled by receiver_program_saved
 
     def perform_destroy(self, instance):
-        instance.is_active = False
-        instance.save(update_fields=['is_active'])
+        instance.delete()
         # receiver_program_saved will see is_active=False and remove from search
 
 

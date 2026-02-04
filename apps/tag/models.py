@@ -2,7 +2,7 @@ from ..core import _, models as core_models, modelfields as core_modelfields
 from . import managers
 
 
-class Tag(core_models.CommonModel, core_models.ActivateModel,  core_models.TrackedModel):
+class Tag(core_models.CommonModel, core_models.ActivateModel,  core_models.TrackedModel,core_models.SoftDeleteModel):
     """
     This class is used to represent the tag data within the system,
     where each tag is represented by the tag name.

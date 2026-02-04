@@ -12,3 +12,7 @@ class CategoryViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
     filterset_class = filters.CategoryFilter
     search_fields = filters.CategorySearchFields
+
+
+    def perform_destroy(self, instance):
+        instance.delete()

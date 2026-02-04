@@ -24,11 +24,7 @@ class EpisodeViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
         serializer.save(updated_by=self.request.user)
 
     def perform_destroy(self, instance):
-        # If you want soft-delete, just mark inactive and save;
-        # signals will recompute count and remove from search.
-        instance.is_active = False
-        instance.save(update_fields=['is_active'])
-        # No need to call SearchService here; signal will pick it up.
+        instance.delete()  # SoftDeleteModel.delete() handles soft-deletion
 
 
 class PublicEpisodeViewSet(viewsets.ReadOnlyModelViewSet,core_mixins.CachedViewSetMixin):

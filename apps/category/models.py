@@ -6,7 +6,7 @@ from . import managers
 from ..core.utils.slug import slugify
 
 
-class Category(core_models.CommonModel, core_models.ActivateModel, core_models.TrackedModel):
+class Category(core_models.CommonModel, core_models.ActivateModel, core_models.TrackedModel,core_models.SoftDeleteModel):
 
     name = core_modelfields.NameField()
     slug = core_modelfields.SlugField()

@@ -12,7 +12,7 @@ from ..tag import modelfields as tag_modelfields
 from . import managers,modelfields
 
 
-class Episode(core_models.CommonModel, core_models.TrackedModel,core_models.ActivateModel):
+class Episode(core_models.CommonModel, core_models.TrackedModel,core_models.ActivateModel,core_models.SoftDeleteModel):
     program = modelfields.ProgramField()
     title = modelfields.TitleField()
     slug = core_modelfields.SlugField()

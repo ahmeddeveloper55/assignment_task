@@ -23,17 +23,16 @@ class TagAccessPolicy(AccessPolicy):
         if user.is_anonymous:
             return queryset.model.objects.none()
 
+        # Admin sees everything (including inactive) but not deleted
         if getattr(user, "is_admin", False):
-            return queryset.model.objects.all()
-        
-        # Editor / supervisor only see activated objects
+            return queryset.model.objects.filter(is_deleted=False)
+
+        # Editor / supervisor only see activated (is_active=True) and non-deleted objects
         if getattr(user, "is_editor", False) or getattr(user, "is_supervisor", False):
-            return queryset.model.activated_objects.all()
-        
-        
+            return queryset.model.activated_objects.filter(is_deleted=False)
 
-
-        return queryset.model.activated_objects.all()
+        # Other authenticated roles (client) read-only: active and non-deleted only
+        return queryset.model.activated_objects.filter(is_deleted=False)
 
     @classmethod
     def scope_fields(cls, request, fields: dict, instance=None) -> dict:
@@ -42,9 +41,6 @@ class TagAccessPolicy(AccessPolicy):
         if user.is_authenticated and user.is_admin:
             return fields
 
-        fields.pop('created_at', None)
-        fields.pop('updated_at', None)
-        fields.pop('is_active', None)
         fields.pop('enabled_at', None)
         fields.pop('note', None)
         fields.pop('created_by', None)

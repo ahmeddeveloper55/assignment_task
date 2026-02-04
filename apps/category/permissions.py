@@ -22,12 +22,13 @@ class CategoryAccessPolicy(AccessPolicy):
         if user.is_anonymous:
             return queryset.model.objects.none()
 
+        # Admin sees everything (including inactive) but not deleted
         if getattr(user, 'is_admin', False):
-            return queryset.model.objects.all()
+            return queryset.model.objects.filter(is_deleted=False)
 
-        # editor + supervisor: only activated categories
+        # Editor / supervisor only see activated (is_active=True) and non-deleted objects
         if getattr(user, 'is_editor', False) or getattr(user, 'is_supervisor', False):
-            return queryset.model.activated_objects.all()
+            return queryset.model.activated_objects.filter(is_deleted=False)
 
-        # others: only activated
-        return queryset.model.activated_objects.all()
+        # Other authenticated roles (client) read-only: active and non-deleted only
+        return queryset.model.activated_objects.filter(is_deleted=False)

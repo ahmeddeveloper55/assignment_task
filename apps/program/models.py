@@ -10,7 +10,7 @@ from ..tag import modelfields as tag_modelfields
 from . import ProgramTypeChoices, managers, modelfields
 
 
-class Program(core_models.CommonModel, core_models.TrackedModel, core_models.ActivateModel):
+class Program(core_models.CommonModel, core_models.TrackedModel, core_models.ActivateModel,core_models.SoftDeleteModel):
     title = modelfields.TitleField()
     slug = core_modelfields.SlugField(unique=True)
     short_description = modelfields.ShortDescriptionField(blank=True)

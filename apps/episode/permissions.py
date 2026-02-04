@@ -33,14 +33,16 @@ class EpisodeAccessPolicy(AccessPolicy):
         if user.is_anonymous:
             return queryset.model.objects.none()
 
+        # Admin sees everything (including inactive) but not deleted
         if getattr(user, 'is_admin', False):
-            return queryset.model.objects.select_related('program', 'program__category')
+            return queryset.model.objects.filter(is_deleted=False).select_related('program', 'program__category')
 
+        # Editor / supervisor only see activated (is_active=True) and non-deleted objects
         if getattr(user, 'is_editor', False) or getattr(user, 'is_supervisor', False):
-            return queryset.model.activated_objects.select_related('program', 'program__category')
+            return queryset.model.activated_objects.filter(is_deleted=False).select_related('program', 'program__category')
 
-        # Other authenticated roles: only active episodes
-        return queryset.model.activated_objects.select_related('program', 'program__category')
+        # Other authenticated roles (client) read-only: active, published, and non-deleted only
+        return queryset.model.activated_objects.filter(is_deleted=False, is_published=True).select_related('program', 'program__category')
 
 
 class DiscoveryEpisodeAccessPolicy(AccessPolicy):
@@ -57,4 +59,4 @@ class DiscoveryEpisodeAccessPolicy(AccessPolicy):
 
     @classmethod
     def scope_queryset(cls, request, queryset):
-        return queryset.model.objects.published().select_related('program', 'program__category')
+        return queryset.model.objects.filter(is_deleted=False,is_active=True).published().select_related('program', 'program__category')

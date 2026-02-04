@@ -16,3 +16,6 @@ class TagViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     permission_classes = (permissions.TagAccessPolicy,)
     filter_backends = [rest_filters.SearchFilter, DjangoFilterBackend]
     filterset_class = filters.TagFilter
+
+    def perform_destroy(self, instance):
+        instance.delete()
