@@ -27,7 +27,7 @@ class EpisodeViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
         instance.delete()  # SoftDeleteModel.delete() handles soft-deletion
 
 
-class PublicEpisodeViewSet(viewsets.ReadOnlyModelViewSet,core_mixins.CachedViewSetMixin):
+class PublicEpisodeViewSet(core_mixins.CachedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     """
     Discovery episodes.
     """

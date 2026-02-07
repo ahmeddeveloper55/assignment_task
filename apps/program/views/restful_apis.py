@@ -26,10 +26,12 @@ class ProgramViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
 
     def perform_destroy(self, instance):
         instance.delete()
+        instance.is_active = False
+        instance.save(update_fields=['is_active'])
         # receiver_program_saved will see is_active=False and remove from search
 
 
-class DiscoveryProgramViewSet(viewsets.ReadOnlyModelViewSet,core_mixins.CachedViewSetMixin):
+class DiscoveryProgramViewSet(core_mixins.CachedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     """
     Discovery programs.
     """
