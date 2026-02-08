@@ -1,7 +1,7 @@
 import pandas as pd
+import hashlib
 from django.http import HttpResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -13,26 +13,67 @@ from .utils.translation import _
 
 class CachedViewSetMixin(object):
     """
-    This mixin provides caching functionality for the list and retrieve views of a ViewSet.
-    The cache timeout is set to 15 minutes by default.
+    This mixin provides caching functionality for list and retrieve views.
+    Uses manual cache.get/cache.set instead of cache_page decorator
+    for reliable operation with Django's development server.
     """
-    cache_timeout = 60 * 15  # Default cache timeout of 15 minutes
+    cache_timeout = 60 * 15  # Default 15 minutes
 
-    @method_decorator(cache_page(cache_timeout))
+    def _make_cache_key(self, request, view_type):
+        """
+        Generate a unique cache key based on:
+        - View class name
+        - View type (list or retrieve)
+        - Request path
+        - Query parameters
+        """
+        view_name = self.__class__.__name__
+        path = request.path
+        query_string = request.META.get('QUERY_STRING', '')
+        
+        raw_key = f"{view_name}:{view_type}:{path}:{query_string}"
+        key_hash = hashlib.md5(raw_key.encode()).hexdigest()
+        return f"discovery:{key_hash}"
+
     def list(self, request, *args, **kwargs):
         """
-        Cache the list view of the ViewSet for the duration specified in cache_timeout.
-        This method handles HTTP GET requests for listing objects.
+        Cache the list view. Check cache first, query DB on miss.
         """
-        return getattr(super(), 'list')(request, *args, **kwargs)
+        cache_key = self._make_cache_key(request, 'list')
+        
+        # Check cache first
+        cached_response = cache.get(cache_key)
+        if cached_response is not None:
+            return Response(cached_response)
+        
+        # Cache miss - get from parent
+        response = super().list(request, *args, **kwargs)
+        
+        # Store in cache
+        if response.status_code == 200:
+            cache.set(cache_key, response.data, self.cache_timeout)
+        
+        return response
 
-    @method_decorator(cache_page(cache_timeout))
     def retrieve(self, request, *args, **kwargs):
         """
-        Cache the retrieve view of the ViewSet for the duration specified in cache_timeout.
-        This method handles HTTP GET requests for retrieving a single object.
+        Cache the retrieve view. Check cache first, query DB on miss.
         """
-        return getattr(super(), 'retrieve')(request, *args, **kwargs)
+        cache_key = self._make_cache_key(request, 'retrieve')
+        
+        # Check cache first
+        cached_response = cache.get(cache_key)
+        if cached_response is not None:
+            return Response(cached_response)
+        
+        # Cache miss - get from parent
+        response = super().retrieve(request, *args, **kwargs)
+        
+        # Store in cache
+        if response.status_code == 200:
+            cache.set(cache_key, response.data, self.cache_timeout)
+        
+        return response
 
 
 class ActivateModelMixin(object):

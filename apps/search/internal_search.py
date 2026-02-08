@@ -1,15 +1,34 @@
 # apps/search/internal_search.py
 
+import hashlib
+import json
 from django.db.models import Q
+from django.core.cache import cache
 
 from apps.program.models import Program
 from apps.episode.models import Episode
 
+# Cache TTL: 15 minutes
+SEARCH_CACHE_TTL = 60 * 15
+
+
+def _make_cache_key(query: str, limit: int, offset: int) -> str:
+    """
+    Generate a unique cache key for the search query.
+    Uses MD5 hash to handle special characters and long queries.
+    """
+    raw_key = f"search:{query.lower().strip()}:limit:{limit}:offset:{offset}"
+    key_hash = hashlib.md5(raw_key.encode()).hexdigest()
+    return f"search_internal:{key_hash}"
+
 
 def search_internal_content(query: str, limit: int = 10, offset: int = 0):
     """
-    Simple internal search:
+    Simple internal search with Redis caching:
 
+    - First checks Redis cache for existing results
+    - If cache hit → return cached results immediately
+    - If cache miss → query DB, cache results, then return
     - Looks into Program and Episode models.
     - Searches in title + short/long description/body.
     - Returns a flat list of results with a `kind` key
@@ -18,6 +37,15 @@ def search_internal_content(query: str, limit: int = 10, offset: int = 0):
     if not query:
         return []
 
+    # Generate cache key
+    cache_key = _make_cache_key(query, limit, offset)
+
+    # Check cache first
+    cached_results = cache.get(cache_key)
+    if cached_results is not None:
+        return cached_results
+
+    # Cache miss - query database
     # Normalize pagination window
     start = max(offset, 0)
     end = start + max(limit, 1)
@@ -108,5 +136,10 @@ def search_internal_content(query: str, limit: int = 10, offset: int = 0):
         for row in episode_rows
     ]
 
+    # Combine results
+    results = program_results + episode_results
 
-    return program_results + episode_results
+    # Store in cache for future requests
+    cache.set(cache_key, results, SEARCH_CACHE_TTL)
+
+    return results
