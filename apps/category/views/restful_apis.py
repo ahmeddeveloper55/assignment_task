@@ -6,6 +6,9 @@ from .. import models, serializers, permissions, filters
 
 
 class CategoryViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
+    """
+    CMS CRUD for categories.
+    """
     queryset = models.Category.objects.none()
     serializer_class = serializers.CategorySerializer
     permission_classes = (permissions.CategoryAccessPolicy,)
@@ -13,6 +16,16 @@ class CategoryViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
     filterset_class = filters.CategoryFilter
     search_fields = filters.CategorySearchFields
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
     def perform_destroy(self, instance):
-        instance.delete()
+        """
+        Soft delete and deactivate the category.
+        """
+        instance.delete()  # Sets is_deleted=True
+        instance.is_active = False
+        instance.save(update_fields=['is_active'])

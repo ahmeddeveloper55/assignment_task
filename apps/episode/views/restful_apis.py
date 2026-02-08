@@ -24,7 +24,12 @@ class EpisodeViewSet(viewsets.ModelViewSet, core_mixins.ActivateModelMixin):
         serializer.save(updated_by=self.request.user)
 
     def perform_destroy(self, instance):
-        instance.delete()  # SoftDeleteModel.delete() handles soft-deletion
+        """
+        Soft delete and deactivate the episode.
+        """
+        instance.delete()  # Sets is_deleted=True
+        instance.is_active = False
+        instance.save(update_fields=['is_active'])
 
 
 class PublicEpisodeViewSet(core_mixins.CachedViewSetMixin, viewsets.ReadOnlyModelViewSet):
